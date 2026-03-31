@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend Trigger Test</title>
+</head>
+<body>
+    <h1>Backend Trigger Test</h1>
+    <p>This page is used to test the backend trigger functionality.</p>
+    <h2>waking backend every 10 minutes...</h2>
+
+<script>
+    const URL = 'http://localhost:3000/trigger'; // Replace with your backend URL
+
+    function trigger(){
+        const iframe =document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.src = URL+"?t="+Date.now();
+        document.body.appendChild(iframe);
+
+        console.log('wake up request sent  at', new Date().toLocaleTimeString());
+
+
+        setTimeout(() => {
+            document.body.removeChild(iframe);
+        }, 5000); // Remove the iframe after 5 seconds
+    }
+trigger(); // Initial trigger when the page loads
+
+setInterval(trigger, 10 * 60 * 1000); // Trigger every 10 minutes~~
+
+
+</script>
+
+
+</body>
+</html>
